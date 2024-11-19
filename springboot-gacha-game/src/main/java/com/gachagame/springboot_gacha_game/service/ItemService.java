@@ -25,7 +25,7 @@ public class ItemService {
         return itemRepository.save(item);
     }
     
-    // This method selects a random item based on the rarity weights.
+    // This method selects a random item based on the rarity weights. *WORK*
     public ItemModel getItemByRarity() {
     	// Retrieve all items from the repository
         List<ItemModel> allItems = itemRepository.findAll();

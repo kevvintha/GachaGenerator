@@ -30,7 +30,7 @@ public class ItemController {
     @GetMapping("/random")
     public ResponseEntity<ItemModel> getItemsByRarity() {
     	ItemModel items = service.getItemByRarity();
-        return ResponseEntity.ok(items);
+        return new ResponseEntity<>(items, HttpStatus.FOUND);
     }
    
     // Postman test: Finding the id of the item *WORK* xD
@@ -43,7 +43,7 @@ public class ItemController {
     @GetMapping("/name/{name}")
     public ResponseEntity<List<ItemModel>> getItemsByName(@PathVariable String name) {
         List<ItemModel> items = service.getItemsByName(name);
-        return ResponseEntity.ok(items);
+        return new ResponseEntity<>(items, HttpStatus.FOUND);
     }
     
     // Postman test: Creating a item *NOT SURE IF WORKS*

@@ -18,6 +18,7 @@ public class ItemSeeder implements CommandLineRunner{
     public void run(String... args) throws Exception {
 		if(itemRepository.count() == 0) { // prevent duplicate data
             // Add some dummy items
+			// Will delete later on
             itemRepository.save(new ItemModel("Common Sword", "COMMON", ""));
             itemRepository.save(new ItemModel("Rare Sword", "RARE", ""));
             itemRepository.save(new ItemModel("Epic Sword", "EPIC", ""));
