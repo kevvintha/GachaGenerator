@@ -1,10 +1,14 @@
 package com.gachagame.springboot_gacha_game.service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import org.springframework.stereotype.Service;
 
+import com.gachagame.springboot_gacha_game.attribute.ItemAttributes.Rarity;
 import com.gachagame.springboot_gacha_game.exception.ItemNotFoundException;
 import com.gachagame.springboot_gacha_game.model.ItemModel;
 import com.gachagame.springboot_gacha_game.repository.ItemRepository;
@@ -13,10 +17,8 @@ import com.gachagame.springboot_gacha_game.repository.ItemRepository;
 @Service
 public class ItemService {
 	
-	private final ItemRepository itemRepository;
+	private ItemRepository itemRepository;
 	
-    private final Random random = new Random();
-
     public ItemService(ItemRepository itemRepository) {
         this.itemRepository = itemRepository;
     }
@@ -25,17 +27,30 @@ public class ItemService {
         return itemRepository.save(item);
     }
     
-    // Generate random item based off rarity
-    public ItemModel getItemsByRarity(String rarity) {
-    	List<ItemModel> findByRarity = itemRepository.findByRarity(rarity);
-    	
-    	if(findByRarity.isEmpty()) {
-    		throw new ItemNotFoundException("No items found with rarity: " + rarity);
-    	}
-    	
-    	// Select a random item from the filtered list
-        int randomIndex = random.nextInt(findByRarity.size());
-        return findByRarity.get(randomIndex);
+    // This method selects a random item based on the rarity weights.
+    public ItemModel getItemByRarity() {
+    	// Retrieve all items from the repository
+        List<ItemModel> allItems = itemRepository.findAll();
+        List<ItemModel> weightedItems = new ArrayList<>();
+
+        // Loop through all items and add them to the weighted list based on their rarity
+        for (ItemModel item : allItems) {
+        	// Get the item's rarity
+            String rarity = item.getRarity();
+            // Convert the rarity string to the enum
+            Rarity itemRarity = Rarity.valueOf(rarity);
+            // Get the weight from the enum
+            int weight = itemRarity.getWeight();
+            // Add the item to the weighted list according to its weight (chance)
+            for (int i = 0; i < weight; i++) {
+                weightedItems.add(item);
+            }
+        }
+
+        // Select a random item from the weighted list
+        Random random = new Random();
+        int randomIndex = random.nextInt(weightedItems.size());
+        return weightedItems.get(randomIndex); // Return the randomly selected item
     }
     
     // Get all items display (postman)
