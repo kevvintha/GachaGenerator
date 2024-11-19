@@ -26,14 +26,14 @@ public class ItemController {
         this.service = itemService;
     }
 	
-	// Generate random item based off rarity 
+	// Generate random item based off rarity *WORK*
     @GetMapping("/random")
     public ResponseEntity<ItemModel> getItemsByRarity() {
     	ItemModel items = service.getItemByRarity();
         return ResponseEntity.ok(items);
     }
    
-    // Postman test: Finding the id of the item *WORK*
+    // Postman test: Finding the id of the item *WORK* xD
     @GetMapping("/id/{id}")
     public ItemModel getItemById(@RequestParam Long id) {
     	return service.getItemById(id);

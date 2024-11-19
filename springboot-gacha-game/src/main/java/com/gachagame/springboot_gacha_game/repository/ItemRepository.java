@@ -13,7 +13,5 @@ public interface ItemRepository extends JpaRepository<ItemModel, Long>{
 	List<ItemModel> findByRarity(String rarity);
 		
 	List<ItemModel> findByName(String name);
-	
-	
 
 }

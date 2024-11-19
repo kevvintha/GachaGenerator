@@ -16,7 +16,7 @@ public class ItemAttributes {
 	        this.weight = weight;
 	    }
 
-	    // Getter for weight
+	    // Getter for weight 
 	    public int getWeight() {
 	        return weight;
 	    }

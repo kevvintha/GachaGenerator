@@ -50,7 +50,7 @@ public class ItemService {
         // Select a random item from the weighted list
         Random random = new Random();
         int randomIndex = random.nextInt(weightedItems.size());
-        return weightedItems.get(randomIndex); // Return the randomly selected item
+        return weightedItems.get(randomIndex); 
     }
     
     // Get all items display (postman)
