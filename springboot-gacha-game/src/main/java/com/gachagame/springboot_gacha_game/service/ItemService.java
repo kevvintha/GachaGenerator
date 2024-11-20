@@ -52,7 +52,7 @@ public class ItemService {
     }
     
     // Get all items display (postman)
-    public List<ItemModel> getItemsByName(String name) {
+    public List<ItemModel> getItemByName(String name) {
         return itemRepository.findByName(name);
     }
         

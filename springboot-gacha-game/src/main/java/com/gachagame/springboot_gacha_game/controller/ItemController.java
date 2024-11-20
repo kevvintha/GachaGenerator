@@ -33,7 +33,7 @@ public class ItemController {
         return new ResponseEntity<>(items, HttpStatus.FOUND);
     }
    
-    // Postman test: Finding the id of the item *WORK* xD
+    // Postman test: Finding the id of the item *WORK*
     @GetMapping("/id/{id}")
     public ItemModel getItemById(@RequestParam Long id) {
     	return service.getItemById(id);
@@ -41,8 +41,8 @@ public class ItemController {
     
     // Postman test: Finding the name of the item *WORK*
     @GetMapping("/name/{name}")
-    public ResponseEntity<List<ItemModel>> getItemsByName(@PathVariable String name) {
-        List<ItemModel> items = service.getItemsByName(name);
+    public ResponseEntity<List<ItemModel>> getItemByName(@PathVariable String name) {
+        List<ItemModel> items = service.getItemByName(name);
         return new ResponseEntity<>(items, HttpStatus.FOUND);
     }
     
