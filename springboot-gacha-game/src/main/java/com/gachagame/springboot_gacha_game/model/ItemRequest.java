@@ -5,8 +5,15 @@ public class ItemRequest {
 	private String name;
     private String rarity;
     private String description;
+    
+    // Constructor to initialize fields
+    public ItemRequest(String name, String rarity, String description) {
+        this.name = name;
+        this.rarity = rarity;
+        this.description = description;
+    }
 
-    // Getters and setters
+	// Getters and setters
     public String getName() {
         return name;
     }
