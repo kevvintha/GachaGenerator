@@ -46,7 +46,7 @@ public class ItemController {
         return new ResponseEntity<>(items, HttpStatus.FOUND);
     }
     
-    // Postman test: Creating a item *NOT SURE IF WORKS*
+    // Postman test: Creating a item *WORKS*
     @PostMapping("/create") 
     public ResponseEntity<ItemModel> createItem(@RequestBody ItemRequest itemRequest ) {   	
     	// Convert DTO to Entity

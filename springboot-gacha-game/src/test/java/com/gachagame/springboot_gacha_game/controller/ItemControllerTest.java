@@ -47,14 +47,12 @@ class ItemControllerTest {
 
 	@Test
 	void testGetItemsByRarity() {
-        // Mock service response
 		ItemModel mockItem = new ItemModel("Test Stick", "Common", "Test Description");
 		when(itemService.getItemByRarity()).thenReturn(mockItem);
         
 		// Call the controller method
 		ResponseEntity<ItemModel> response = itemController.getItemsByRarity();
         
-		// Assert response
 		assertEquals(HttpStatus.FOUND, response.getStatusCode()); // Verify HTTP status
 		assertEquals(mockItem, response.getBody());               // Verify the body
 		
@@ -65,19 +63,17 @@ class ItemControllerTest {
 
 	@Test
 	void testGetItemById() {
-		// Arrange
         Long itemId = 1L;
         ItemModel mockItem = new ItemModel(); // Example ItemModel
+        
         mockItem.setId(itemId);
         mockItem.setName("Sword");
         mockItem.setRarity("COMMON");
         mockItem.setDescription("A common sword");
         when(itemService.getItemById(itemId)).thenReturn(mockItem); // Mock the service call
 
-        // Act
         ItemModel actualItem = itemController.getItemById(itemId); 
 
-        // Assert
         assertNotNull(actualItem); 
         assertEquals(mockItem.getId(), actualItem.getId()); // Ensure the ID matches
         assertEquals(mockItem.getName(), actualItem.getName()); // Ensure the name matches
@@ -87,17 +83,14 @@ class ItemControllerTest {
 
 	@Test
 	void testGetItemByName() {
-		// Arrange
 		ItemModel mockItem = new ItemModel("Test Stick", "Common", "Test Description");
 		String itemName = mockItem.getName();
 		
 	    // Mock the behavior of the service to return a list containing the mock item
 		when(itemService.getItemByName(itemName)).thenReturn(Collections.singletonList(mockItem)); // Return a list with one item
 		
-		// Act
 		List<ItemModel> actualItem = itemService.getItemByName(itemName);
 
-		// Assert
 	    assertEquals(1, actualItem.size());           // Assert that the list has one item
 	    assertEquals(mockItem, actualItem.get(0));    // Assert that the first item is the mock item
 	    verify(itemService).getItemByName(itemName);  // Verify that the service method was called
@@ -106,16 +99,14 @@ class ItemControllerTest {
 
 	@Test
 	void testCreateItem() throws Exception {
-		// Arrange
 		ItemRequest itemRequest = new ItemRequest("Test Sword", "COMMON", "A basic sword");
         ItemModel mockItem = new ItemModel("Test Sword", "COMMON", "A basic sword");
         
         when(itemService.saveItem(any(ItemModel.class))).thenReturn(mockItem);
 
-        // Act: Call the controller method directly
+        // Call the controller method directly
         ResponseEntity<ItemModel> response = itemController.createItem(itemRequest);
         		
-        // Assert: Verify the response
         assertNotNull(response);
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
         assertEquals("Test Sword", response.getBody().getName());
